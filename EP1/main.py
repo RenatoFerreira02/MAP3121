@@ -44,14 +44,14 @@ def solucao_LU(l,u,d,c,n):
     return(x)
 
 def solucao_ciclica(l,u,d,c,a,n):
-    v = np.empty(n)
+    v = np.empty(n+1)
     v[1]=a[1]
     v[n]=c[n-1]
-    y_barra=np.empty(n)
+    y_barra=np.empty(n+1)
     y_barra = solucao_LU(l,u,d,c,n)
-    z_barra=np.empty(n)
+    z_barra=np.empty(n+1)
     z_barra = solucao_LU(l,u,v,c,n)
-    x=np.empty(n)
+    x=np.empty(n+1)
     x[n]=(d[n]-c[n]*y_barra[1]-a[n]*y_barra[n-1])/(b[n]-c[n]*z_barra[1]-a[n]*z_barra[n-1])
     for i in range(n-1,0,-1):
         x[i]=y_barra[i]-x[n]*z_barra[i]
@@ -66,7 +66,7 @@ d = np.empty(n)
 for i in range(1,index):
     d[i] = int(input("Digite os valores de D: "))
 if(ciclica):
-    x = solucao_ciclica(l,u,d,c,a,n)
+    x = solucao_ciclica(l,u,d,c,a,index)
 else:
     x = solucao_LU(l,u,d,c,index)
 print(a)
